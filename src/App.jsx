@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
 import Board from './components/Board'
+import './styles/root.scss'
 
 const App = () => {
   return (
-    <div>
+    <div className='app'>
       <h1>Tic Tac Toe Game</h1>
       <Board/>
     </div>
