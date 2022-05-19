@@ -1,7 +1,7 @@
 import Board from "./components/Board";
 import "./styles/root.scss";
 import History from "./components/History";
-import StatusMessage  from "./components/StatusMessage";
+import StatusMessage from "./components/StatusMessage";
 import { useState } from "react";
 import { calculateWinner } from "./helper";
 
@@ -18,7 +18,7 @@ const App = () => {
 
   const current = history[currentMove];
 
-  const {winner, winningSquares} = calculateWinner(current.boardState);
+  const { winner, winningSquares } = calculateWinner(current.boardState);
 
   const handleSquareClick = (position) => {
     if (current.boardState[position] || winner) {
@@ -45,19 +45,29 @@ const App = () => {
   const onNewGame = () => {
     setHistory(NEW_GAME);
     setCurrentMove(0);
-  }
+  };
 
   return (
     <div className="app">
-      <h1>Tic Tac Toe Game</h1>
-      <StatusMessage winner={winner } current={current}/>
+      <h1>
+        Tic <span className="text-green">Tac</span> Toe Game
+      </h1>
+      <StatusMessage winner={winner} current={current} />
       <Board
         boardState={current.boardState}
         handleSquareClick={handleSquareClick}
         winningSquares={winningSquares}
       />
-      <button type="button" onClick={onNewGame}>Start New Game</button>
+      <button
+        type="button"
+        onClick={onNewGame}
+        className={`btn-reset ${winner ? "active" : ""}`}
+      >
+        Start New Game
+      </button>
+      <h2 style={{fontWeight: 'normal'}}>Current game history</h2>
       <History history={history} moveTo={moveTo} currentMove={currentMove} />
+      <div className="bg-balls"/>
     </div>
   );
 };
